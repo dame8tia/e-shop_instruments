@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Nova+Square&display=swap');
+
+:root{
+    --font_nova_square : "Nova square";
+    --color_blue_elec : #09DBF8;
+    --color_red_kuoni : #ff4d5a ;
+    --color_blue_aeag : #4d64b3;
+}
+
+.lien{
+    color:white;
+}
+
+.font_custom_dev{
+    font-family: var(--font_nova_square);
+}
+.color_custom_01{
+    color:var(--color_blue_elec);
+}
+
+.container_border{
+    border:1px solid var(--color_blue_elec);
+}
+
+
+
+/* ----------------- ----------------- */
+
+.border_red {
+    border : 3px solid red;
+}
+
+.border_green {
+    border : 5px solid green;
+}
+
+.border_blue {
+    border : 5px solid blue;
+}
+
+header{
+    background-image: url("../images/banniere.jpg");
+}
+
+.header_container{
+    min-height:100vh;
+}
+
+/* Header Partie haute */
+/* .navbar-toggler{
+    color:var(--color_blue_elec);
+    border-color: var(--color_blue_elec);
+}
+.nav-link{
+    color:var(--color_blue_elec);
+}
+.nav-link:hover{
+    color:rgb(248, 11, 192);
+}
+.nav-link .active{
+    color:var(--color_blue_elec);
+} */
+
+/* Header Partie basse */
+/* .menu_deco{
+    position:relative;
+    display: block;
+}
+.menu_deco::before{
+    display: block;
+    content:"";
+    position:relative;
+
+    width:30px;
+    height:3px;
+
+    background-color: var(--color_blue_elec);
+    margin-top:0.6rem;
+
+    transition-property: width, height;
+    transition-duration: 0.5s, 0.5s;
+    transition-timing-function: ease-in-out, ease-in-out;
+}
+
+.menu_deco:hover::before{
+    width:60px;
+    height:4px;
+}
+
+.menu_deploy{
+    display:none;
+} */
+
+/* -- Accueil - instruments sous forme de card */
+
+.card_container{
+    width:16rem;
+    height:24rem;
+    margin-top:1.5rem;
+}
+.card--title{
+    height:20%;
+    width:100%;
+}
+.card--entete{
+    height:40%;
+    width:100%;
+}
+.card--body{
+    height:35%;
+    width: 100%;
+}
+.card--footer{
+    text-align:center;
+    /* height:fit-content; */
+    width: 100%;
+}
+
+/* .display-card{
+    display:flex;
+    flex-direction:column;
+    justify-content: space-between;
+} */
+
+
+/* -- Page indiViduelle Instrument */
+
+.ind{
+    width : 100vw;
+    border : 1px solid brown;
+    /* border-radius: 'rounded-pill'; */
+}
+
+.ind--entete{
+    width:fit-content;
+}
+.ind--body{
+    width:fit-content;
+}
+
+.ind--footer{
+    width:fit-content;
+}
+
+
+/* --------- CONTACT ----------- */
+.encadre{
+    /* width:fit-content; */
+    height:auto;
+    background-color:#4d64b3;
+    border-radius: 25px;
+    
+}
+
+
+/* --------- FOOTER -------------*/
+
+
+/* ----------------------------------------------- */
+
+@media (min-width: 576px) and (max-width:950px){
+
+   .header_container{
+        min-height:60vh;
+    }
+
+    .header--bottom--list--skills{
+        font-size: 0.865rem;
+    }
+
+    .menu_deploy{
+        display:inline-block;
+        margin-right:1.5rem;
+    }
+
+    .menu_deco{
+        display:none;
+    }
+
+    .card_container{
+        width:16rem;
+        height:24rem;
+        margin-top:1.5rem;
+    }
+
+}
+
+@media(min-width: 950px){
+
+   .header_container{
+        min-height:60vh;
+    }
+    .header--name{
+        font-size: 1.6rem;
+    }
+    .header--bottom--list--skills{
+        font-size: 0.865rem;
+    }
+    .menu_deploy{
+        display:inline-block;
+        margin-right:1.5rem;
+    }
+    .menu_deploy:hover{
+        font-size: large;
+    }
+
+    .menu_deco{
+        display:none;
+    }
+
+    .card_container{
+        width:16rem;
+        height:24rem;
+        margin-top:1.5rem;
+    }
+
+}
