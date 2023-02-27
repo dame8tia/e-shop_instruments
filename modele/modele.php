@@ -6,7 +6,7 @@ abstract class Modele {
   private $bdd;
 
   // Exécute une requête SQL éventuellement paramétrée
-  protected function executerRequete($sql, $params = null) {
+  protected function executerRequete(string $sql, $params = null) {
     
     if ($params == null) {
       $resultat = $this->getBdd()->query($sql);    // exécution directe

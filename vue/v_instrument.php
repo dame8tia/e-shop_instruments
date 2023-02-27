@@ -34,8 +34,7 @@
     <div class="col-12 col-sm-6 col-lg-4 ind--footer">
       <button type="button" class="text-center btn btn-secondary">
         <a class="text-light" href="#">Ajouter au panier</a>
-      </button>
-     
+      </button>     
     </div>
 
   </div>

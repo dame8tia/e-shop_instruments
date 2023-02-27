@@ -2,16 +2,20 @@
 
 require_once 'controleur/controleurAccueil.php';
 require_once 'controleur/controleurInstrument.php';
+require_once 'controleur/controleurPanier.php';
 //require_once 'Vue/Vue.php';
 
 class Routeur {
 
   private $ctrlAccueil;
   private $ctrlInstrument;
+  private $ctrlPanier ;
 
   public function __construct() {
     $this->ctrlAccueil = new ControleurAccueil();
     $this->ctrlInstrument = new ControleurInstrument();
+    $this->ctrlPanier = new ControleurPanier();
+
   }
 
   // Traite une requête entrante
@@ -32,41 +36,43 @@ class Routeur {
             else
               throw new Exception("Identifiant instrument non défini");  
             break;
-          case 'listing_instruments':
+          case 'listing_instruments': // back office admin
             $this->ctrlInstrument->listingInstruments();
             break;
-          case 2:
-            echo "i égal 2";
-            break;
-          default :
-            throw new Exception("Action non valide");
-        }
-      }
-      else {  // aucune action définie : affichage de l'accueil
-        $this->ctrlAccueil->accueil();
-      }
-
-
-
-
-/*         if ($_GET['action'] == 'instrument') {
-          if (isset($_GET['id'])) {
-            $idInstrument = intval($_GET['id']);
-            if ($idInstrument != 0) {
-              $this->ctrlInstrument->instrument($idInstrument);
+          case "panier":
+            if (isset($_GET['id'])) {
+              $idInstrument = intval($_GET['id']);
+              if ($idInstrument != 0) {
+                //echo "<script> alert('instrument ajouté au panier')</script>";
+                $qtite = 1;
+                //$qtite = readline('Enter la quantité souhaitée : '); // méthode pour le terminal
+                $this->ctrlPanier->addInstrumentPanier($idInstrument, $qtite); 
+              }
+              else
+                throw new Exception("Identifiant instrument non valide");
             }
-            else
-              throw new Exception("Identifiant de billet non valide");
-          }
-          else
-            throw new Exception("Identifiant de billet non défini");
-        }
-        else
+            else // index.php?action=panier // sans id ; le panier doit s'afficher
+              {
+                // Lancer la fonction getPanier via le controller
+                $this->ctrlPanier->getPanier();                
+              }  
+            break;
+          case "clearPanier":
+            $this->ctrlPanier->clearPanier();
+            echo "<script> alert('Panier vidé')</script>";
+            header('Location: //localhost/instruments/index.php?action=panier');
+            // or die();
+            exit();
+          case 'retirerInstr':
+            echo "Retirer l'instrument du pannier" ; 
+            break ;
+          default :
           throw new Exception("Action non valide");
+        }
       }
-      else {  // aucune action définie : affichage de l'accueil
+      else {  // aucune action définie - Affichaga par défaut : affichage de l'accueil
         $this->ctrlAccueil->accueil();
-      }*/
+      }
     } 
     catch (Exception $e) {
       $this->erreur($e->getMessage());

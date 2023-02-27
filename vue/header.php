@@ -27,7 +27,7 @@
                                         <a class="nav-link active" aria-current="page" href="index.php">Accueil</a>
                                         </li>
                                         <li class="nav-item">
-                                        <a class="nav-link" href="#">Mon panier</a>
+                                        <a class="nav-link" href="index.php?action=panier">Mon panier</a>
                                         </li>
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

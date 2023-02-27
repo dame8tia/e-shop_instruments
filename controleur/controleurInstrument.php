@@ -11,14 +11,14 @@ class ControleurInstrument {
     $this->instrument = new Instrument();
   }
 
-  // Affiche la liste de tous les billets du blog
+  // Affiche la page d'un instrument ciblé
   public function instrument($idInstrument) {
     $instrument = $this->instrument->getInstrument($idInstrument);
     $vue = new Vue("instrument");
     $vue->generer(array('instrument' => $instrument));;//$vue->generer()
   }
 
-  // Affiche la liste de tous les billets du blog
+  // Affiche la liste de tous les instruments du magasin
   public function listingInstruments() {
     $instruments = $this->instrument->getInstruments();
     $vue = new Vue("listingInstruments");

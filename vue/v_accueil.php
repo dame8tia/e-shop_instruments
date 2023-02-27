@@ -1,5 +1,11 @@
 <?php $this->titre = "My e-shop"; ?>
 
+<div class="">
+<button type="button" class="text-center btn btn-secondary">
+  <a class="text-light" href="index.php?action=panier">Voir le panier</a>
+</button>     
+</div>
+
 <div class="container border_red my-5">
   <div class="row justify-content-between">
     <?php foreach ($instruments as $instrument): ?>
@@ -36,6 +42,9 @@
 
           <div class="card--footer">
             <a href="<?= "index.php?action=instrument&id=". $instrument['id_inst'] ?>" class="btn btn-primary">Voir</a>
+            <button type="button" class="text-center btn btn-secondary">
+              <a class="text-light" href="<?= "index.php?action=panier&id=". $instrument['id_inst'] ?>">Ajouter au panier</a>
+            </button> 
           </div>
 
         </div>
