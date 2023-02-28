@@ -23,8 +23,17 @@ class Panier extends Modele  {
         }
         $this->savePanier();
     }
+
+    public function reduceQtity($idInstr, $qtite) {
+        if(isset($this->items[$idInstr])) {
+            $this->items[$idInstr] -= $qtite;
+        } else {
+            $this->items[$idInstr] = $qtite;
+        }
+        $this->savePanier();
+    }
     
-    public function suppInstrument($idInstr) {
+    public function delInstrument($idInstr) {
         unset($this->items[$idInstr]);
         $this->savePanier();
     }

@@ -5,17 +5,11 @@
         </button>
         <button>
             <a class="btn btn-primary" href="index.php" role="button">Revenir à l'accueil</a>
-        </button>        
+        </button> 
     </div>
 </div>
 
-<?php //echo "<pre>" ; ?>
-<?php //var_dump($data) ; ?>
-<?php //echo "</pre>" ; ?>
-
 <?php $this->titre = "My e-shop"; ?>
-
-
 
 <div class="container">
     <h1 >Mon panier</h1> 
@@ -33,13 +27,16 @@
                 <th scope="col">Nb_en_stock</th>
                 <th scope="col">Chemin photo</th>
                 <th scope="col">Quantité demandée</th>
+                <th scope="col">Total par instrument (HT)</th>
                 <th scope="col">Retirer</th>
             </tr>
         </thead>    
         
         <tbody class="table-group-divider">
             <?php
-            // On affiche chaque recette une à une
+            // variable pour stocker la somme due par instrument (prix*quantité)
+            $sumPerInstr = array();
+            // On affiche chaque instrument un à un
             foreach ($data as $ligne) :
             ?>
             <tr>
@@ -52,16 +49,30 @@
                 <td>
                     <img src="<?= $ligne['img_inst']?>" alt="image de l'instrument" width=50px height="50px">                
                 </td>
-                <td>
-                    <input type="number" value="<?= $panier[$id]?>">
+                <td> 
+                    <input class="InputQt" name="quantite" type="number" value="<?= $panier[$id]?>" width="15px" readonly>
+                    <a href="index.php?action=panier&idplus=<?=$ligne['id_inst'];?>" class="plus" title="Plus"><span><i class="bi bi-plus"></i><span></a>
+                    <a href="index.php?action=panier&idmoins=<?=$ligne['id_inst'];?>" class="minus" title="Minus"><span><i class="bi bi-dash"></i><span></a>                
                 </td>
                 <td>
-                  <a href="index.php?action=retirerInstr" class="delete" title="Delete"><span><i class="bi bi-trash3-fill"></i><span></a>
+                    <!-- Somme par instrument -->
+                    <?= $ligne['prix_inst']*$panier[$id]?> €
+                    <?php array_push($sumPerInstr, $ligne['prix_inst']*$panier[$id])?>
+                </td>
+                <td>                
+                  <a href="index.php?action=retirerInstrPanier&id=<?=$ligne['id_inst'];?>" class="delete" title="Delete"><span><i class="bi bi-trash3-fill"></i><span></a>
               </td>
             </tr>
             <?php
                 endforeach ;
             ?>
+            <td>
+                <label for="">Total TH</label>
+                <input type="text" value = "<?= array_sum($sumPerInstr)+(array_sum($sumPerInstr)*(TVA/100))?>">€ TTC
+                <button>
+                    <a class="btn btn-primary" href="index.php?action=validerPanier" role="button">Valider le panier</a>
+                </button>  
+            </td>
         </tbody>       
     </table>
     <?php else : echo "Panier vide" ; ?>

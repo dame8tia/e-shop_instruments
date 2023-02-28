@@ -141,7 +141,10 @@ header{
 .ind--footer{
     width:fit-content;
 }
-
+/* --------- PANIER ----------- */
+.InputQt{
+    width:70px;
+}
 
 /* --------- CONTACT ----------- */
 .encadre{

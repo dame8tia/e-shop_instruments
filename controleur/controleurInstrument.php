@@ -15,13 +15,13 @@ class ControleurInstrument {
   public function instrument($idInstrument) {
     $instrument = $this->instrument->getInstrument($idInstrument);
     $vue = new Vue("instrument");
-    $vue->generer(array('instrument' => $instrument));;//$vue->generer()
+    $vue->generer(array('instrument' => $instrument));//$vue->generer()
   }
 
   // Affiche la liste de tous les instruments du magasin
   public function listingInstruments() {
     $instruments = $this->instrument->getInstruments();
     $vue = new Vue("listingInstruments");
-    $vue->generer(array('instruments' => $instruments));;//$vue->generer()
+    $vue->generer(array('instruments' => $instruments));
   }
 }

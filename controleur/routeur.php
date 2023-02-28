@@ -3,18 +3,21 @@
 require_once 'controleur/controleurAccueil.php';
 require_once 'controleur/controleurInstrument.php';
 require_once 'controleur/controleurPanier.php';
-//require_once 'Vue/Vue.php';
+require_once 'controleur/controleurLogAdmin.php';
+require_once 'config.php';
 
 class Routeur {
 
   private $ctrlAccueil;
   private $ctrlInstrument;
   private $ctrlPanier ;
+  private $ctrlLogin ;
 
   public function __construct() {
     $this->ctrlAccueil = new ControleurAccueil();
     $this->ctrlInstrument = new ControleurInstrument();
     $this->ctrlPanier = new ControleurPanier();
+    $this->ctrlLogin = new ControleurLogAdmin();
 
   }
 
@@ -36,17 +39,42 @@ class Routeur {
             else
               throw new Exception("Identifiant instrument non défini");  
             break;
+          
           case 'listing_instruments': // back office admin
-            $this->ctrlInstrument->listingInstruments();
+            if (isset($_SESSION['admin'])){
+              $this->ctrlInstrument->listingInstruments();
+            }
+            else { echo "Réservé à l'admin";
+              $this->ctrlLogin->connecte();
+              }
             break;
+          
           case "panier":
             if (isset($_GET['id'])) {
               $idInstrument = intval($_GET['id']);
               if ($idInstrument != 0) {
-                //echo "<script> alert('instrument ajouté au panier')</script>";
                 $qtite = 1;
                 //$qtite = readline('Enter la quantité souhaitée : '); // méthode pour le terminal
                 $this->ctrlPanier->addInstrumentPanier($idInstrument, $qtite); 
+              }
+              else
+                throw new Exception("Identifiant instrument non valide");
+            }
+            elseif (isset($_GET['idplus'])){
+              $idInstrument = intval($_GET['idplus']);
+              if($idInstrument!=0){
+                $qtite = 1;
+                //$qtite = readline('Enter la quantité souhaitée : '); // méthode pour le terminal
+                $this->ctrlPanier->addInstrumentPanier($idInstrument, $qtite); 
+              }
+              else
+                throw new Exception("Identifiant instrument non valide");
+            }
+            elseif (isset($_GET['idmoins'])){
+              $idInstrument = intval($_GET['idmoins']);
+              if($idInstrument!=0){
+                $nb = 1;
+                $this->ctrlPanier->reduceQuantity($idInstrument, $nb); 
               }
               else
                 throw new Exception("Identifiant instrument non valide");
@@ -63,11 +91,26 @@ class Routeur {
             header('Location: //localhost/instruments/index.php?action=panier');
             // or die();
             exit();
-          case 'retirerInstr':
-            echo "Retirer l'instrument du pannier" ; 
+          
+          case 'retirerInstrPanier':
+            if(isset($_GET['id'])){
+              $idInstrument = intval($_GET['id']);
+              if ($idInstrument != 0) {
+                $this->ctrlPanier->delInstrumentPanier($idInstrument); 
+              }
+              else
+                throw new Exception("Identifiant instrument non valide");
+            }
             break ;
+          
+          case "validerPanier":
+            if (isset($_POST)){
+              echo "A FAIRE Ajouter un enregistrement dans la BDD table commande</br>";
+            }            
+            break ;
+          
           default :
-          throw new Exception("Action non valide");
+            throw new Exception("Action non valide");
         }
       }
       else {  // aucune action définie - Affichaga par défaut : affichage de l'accueil
