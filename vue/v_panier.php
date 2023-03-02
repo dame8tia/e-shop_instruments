@@ -25,7 +25,7 @@
                 <th scope="col">Réf Fabricant</th>
                 <th scope="col">Prix(€)</th>
                 <th scope="col">Nb_en_stock</th>
-                <th scope="col">Chemin photo</th>
+                <th scope="col">Photo</th>
                 <th scope="col">Quantité demandée</th>
                 <th scope="col">Total par instrument (HT)</th>
                 <th scope="col">Retirer</th>
@@ -45,18 +45,19 @@
                 <td><?= $ligne['fabricant_inst'];?></td>
                 <td><?= $ligne['ref_fabricant_inst'] ?></a></td>
                 <td><?= $ligne['prix_inst']?></td>
-                <td><?= $ligne['nb_stock_inst']?></td>
+                <td><?= $ligne['nb_stock_inst']-$panier[$id]?></td>
                 <td>
                     <img src="<?= $ligne['img_inst']?>" alt="image de l'instrument" width=50px height="50px">                
                 </td>
                 <td> 
-                    <input class="InputQt" name="quantite" type="number" value="<?= $panier[$id]?>" width="15px" readonly>
+                    <input class="InputQt" name="quantite" min=1 type="number" value="<?= $panier[$id]?>" width="15px" > <!-- readonly -->
                     <a href="index.php?action=panier&idplus=<?=$ligne['id_inst'];?>" class="plus" title="Plus"><span><i class="bi bi-plus"></i><span></a>
                     <a href="index.php?action=panier&idmoins=<?=$ligne['id_inst'];?>" class="minus" title="Minus"><span><i class="bi bi-dash"></i><span></a>                
                 </td>
                 <td>
                     <!-- Somme par instrument -->
                     <?= $ligne['prix_inst']*$panier[$id]?> €
+                    <!-- Permet de stocker le total par instrument (Prix unitaire * quantité) -->
                     <?php array_push($sumPerInstr, $ligne['prix_inst']*$panier[$id])?>
                 </td>
                 <td>                

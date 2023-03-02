@@ -26,7 +26,12 @@ class Panier extends Modele  {
 
     public function reduceQtity($idInstr, $qtite) {
         if(isset($this->items[$idInstr])) {
-            $this->items[$idInstr] -= $qtite;
+            if($qtite > 1){
+                $this->items[$idInstr] -= $qtite;
+            }
+            elseif ($qtite == 1){
+                $this->delInstrument($idInstr);
+            }            
         } else {
             $this->items[$idInstr] = $qtite;
         }

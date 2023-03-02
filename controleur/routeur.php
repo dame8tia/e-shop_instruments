@@ -18,13 +18,11 @@ class Routeur {
     $this->ctrlInstrument = new ControleurInstrument();
     $this->ctrlPanier = new ControleurPanier();
     $this->ctrlLogin = new ControleurLogAdmin();
-
   }
 
   // Traite une requête entrante
   public function routerRequete() {
     try {
-
       if (isset($_GET['action'])) {
         switch ($_GET['action']) {
           case 'instrument':
@@ -41,12 +39,31 @@ class Routeur {
             break;
           
           case 'listing_instruments': // back office admin
-            if (isset($_SESSION['admin'])){
-              $this->ctrlInstrument->listingInstruments();
+            
+            //Etat de la session avant de recupérer la valeur
+            if (session_status()!='PHP_SESSION_ACTIVE'){
+              session_start();//obligatoire pour accéder à la valeur de la session
+            }   
+            //var_dump($_SESSION['mdp_admin']);        
+            //unset($_SESSION['mdp_admin']); // retirer les informations de la session
+            if (isset($_SESSION['mdp_admin'])){
+              if($_SESSION['mdp_admin']===MDP_BACKOFFICE){
+                $this->ctrlInstrument->listingInstruments();
+              }
+              else {
+                unset($_SESSION['mdp_admin']);
+                $this->ctrlLogin->login();
+              }              
             }
-            else { echo "Réservé à l'admin";
+            else {
               $this->ctrlLogin->connecte();
               }
+            break;
+          case "seDeconnecter":
+            if (session_status()!='PHP_SESSION_ACTIVE'){
+              session_start();//obligatoire pour accéder à la valeur de la session
+            }
+            $this->ctrlLogin->seDeconnecter();
             break;
           
           case "panier":
@@ -61,6 +78,7 @@ class Routeur {
                 throw new Exception("Identifiant instrument non valide");
             }
             elseif (isset($_GET['idplus'])){
+              // augmente de 1 la quantité commandée
               $idInstrument = intval($_GET['idplus']);
               if($idInstrument!=0){
                 $qtite = 1;
@@ -71,6 +89,7 @@ class Routeur {
                 throw new Exception("Identifiant instrument non valide");
             }
             elseif (isset($_GET['idmoins'])){
+              // diminue de 1 la quantité commandée
               $idInstrument = intval($_GET['idmoins']);
               if($idInstrument!=0){
                 $nb = 1;
