@@ -8,9 +8,11 @@
         <link rel="stylesheet" type="text/css" href="style/style.css">
 
         <title><?= $titre ?></title>
+
+        <script src="script/panier.js" defer></script>
     </head>
     
-    <body class="">
+    <body>
         <header class="header_container">
             <!-- <div class="container text-center"> -->
                 <div class="row">
@@ -36,7 +38,7 @@
                                             </a>
                                             <ul class="dropdown-menu">
                                                 <li><a class="dropdown-item" href="index.php?action=listing_instruments">Liste des produits & catégories</a></li>
-                                                <li><a class="dropdown-item" href="index.php?action=listing_livraisons">Liste des livraisons</a></li>
+                                                <li><a class="dropdown-item" href="index.php?action=listing_commande">Liste des commandes clients</a></li>
                                             </ul>
                                         </li>
                                     </ul>

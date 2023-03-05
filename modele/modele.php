@@ -14,6 +14,7 @@ abstract class Modele {
     else {
       $resultat = $this->getBdd()->prepare($sql);  // requête préparée
       $resultat->execute($params);
+      echo $this->getBdd()->lastInsertId();
     }
     return $resultat;
   }

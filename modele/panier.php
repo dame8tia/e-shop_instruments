@@ -43,15 +43,27 @@ class Panier extends Modele  {
         $this->savePanier();
     }
     
+    public function updateQtity($id, $nb){
+        echo "updateQuantite, id :".$id."val".$nb;
+        echo "<script>alert(modele panier.php)</script>";
+        if(isset($this->items[$id])) {
+            
+            $this->items[$id] = $nb;
+        } else {
+            $this->items[$id] = $nb;
+        }
+        $this->savePanier();
+    }
+
     public function clearPanier() {
         $this->items = array();
         $this->savePanier();
     }
-    
+
     public function getPanier() {
         return $this->items;
     }
-    
+     
     private function savePanier() {
         setcookie($this->cookieName, serialize($this->items), time() + (86400 * 30), "/");
     }

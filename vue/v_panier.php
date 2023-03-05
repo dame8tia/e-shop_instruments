@@ -1,3 +1,5 @@
+<?php $this->titre = "My e-shop"; ?>
+
 <div class="row">
     <div class="col">
         <button>
@@ -8,8 +10,6 @@
         </button> 
     </div>
 </div>
-
-<?php $this->titre = "My e-shop"; ?>
 
 <div class="container">
     <h1 >Mon panier</h1> 
@@ -50,7 +50,8 @@
                     <img src="<?= $ligne['img_inst']?>" alt="image de l'instrument" width=50px height="50px">                
                 </td>
                 <td> 
-                    <input class="InputQt" name="quantite" min=1 type="number" value="<?= $panier[$id]?>" width="15px" > <!-- readonly -->
+                    <input id="<?=$ligne['id_inst'];?>" class="InputQt" name="quantite" min=1 type="number" value="<?= $panier[$id]?>" width="15px" > <!-- readonly -->
+                    <!-- Les 2 <a> ci dessous concerne la première méthode pour modifier la quantité -->
                     <a href="index.php?action=panier&idplus=<?=$ligne['id_inst'];?>" class="plus" title="Plus"><span><i class="bi bi-plus"></i><span></a>
                     <a href="index.php?action=panier&idmoins=<?=$ligne['id_inst'];?>" class="minus" title="Minus"><span><i class="bi bi-dash"></i><span></a>                
                 </td>
@@ -71,7 +72,8 @@
                 <label for="">Total TH</label>
                 <input type="text" value = "<?= array_sum($sumPerInstr)+(array_sum($sumPerInstr)*(TVA/100))?>">€ TTC
                 <button>
-                    <a class="btn btn-primary" href="index.php?action=validerPanier" role="button">Valider le panier</a>
+                    <?php $montant_ttc = array_sum($sumPerInstr)+(array_sum($sumPerInstr)*(TVA/100))?>
+                    <a class="btn btn-primary" href="index.php?action=validerPanier&total=<?=$montant_ttc?>&idClt=2" role="button">Valider le panier</a>
                 </button>  
             </td>
         </tbody>       

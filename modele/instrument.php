@@ -28,7 +28,7 @@ class Instrument extends Modele{
     if ($instrument->rowCount() == 1)
       return $instrument->fetch();  // Accès à la première ligne de résultat
     else
-      throw new Exception("Aucun billet ne correspond à l'identifiant '$idInstr'");
+      throw new Exception("Aucun instrumentne correspond à l'identifiant '$idInstr'");
     }
 }
 

@@ -1,12 +1,12 @@
 <?php require 'header.php';?>
 
-        <div id="global" class="">
-            <div id="contenu" class="">
+        <div id="global">
+            <div id="contenu">
                 <?= $contenu ?>
             </div> <!-- #contenu -->
         </div> <!-- #global -->
-    </body> <!-- ouvert dans le header -->
-    
-<?php require 'footer.php';?>
 
+        <?php require 'footer.php';?>
+
+    </body> <!-- ouvert dans le header -->
 </html>
